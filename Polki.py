@@ -11,6 +11,7 @@ webdriver_path = 'chromedriver_linux64/chromedriver'
 
 chrome_options = Options()
 # chrome_options.add_argument("--headless")
+
 driver = webdriver.Chrome(executable_path=webdriver_path, options=chrome_options)
 driver.get(page)
 
