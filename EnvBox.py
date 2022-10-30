@@ -22,24 +22,6 @@ class EnvBox:
             
         self.ONLY_ARTICLE_LINKS_CSS =\
             'div[class=text-box] a'
-
-
-    def createChromiumDriaver(self, arguments: List = []):
-        chrome_driver_manager = ChromeDriverManager(
-            chrome_type=ChromeType.CHROMIUM,
-            version=self.getChromiumVersion(),
-        )
         
-        chrome_options = Options()
-        for arg in arguments:
-            chrome_options.add_argument(arg)
-    
-        driver = webdriver.Chrome(chrome_driver_manager.install(), options=chrome_options)
-        
-        driver.get(self.PAGE)
-    
-        return driver
-
-    # ta funkcja sprawdza która wersje chromoum masz zainstalowaną
-    def getChromiumVersion(self, path='/usr/bin/chromium-browser') -> str | None:
-        return read_version_from_cmd(f"{path} --version", PATTERN[ChromeType.CHROMIUM])
+        self.PATH_TO_CHROMIUM =\
+            '/usr/bin/chromium-browser'
