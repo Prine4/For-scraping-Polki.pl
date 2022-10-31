@@ -7,12 +7,12 @@ from selenium.webdriver.chrome.options import Options
 
 CONFIG_PATH = 'config.json'
 
-
 class EnvBox:
 
     def __init__(self) -> None:
+
         self.PAGE =\
-            "https://polki.pl/po-godzinach/z-zycia-wziete,.html"
+            "https://polki.pl/po-godzinach/z-zycia-wziete,1.html"
                 
         self.REJECT_COOKIES_XPATH =\
             "//button[@class='tcf277-button tcf277-button--slim accept-targeting-disclaimer-button']"

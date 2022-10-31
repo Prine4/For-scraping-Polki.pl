@@ -3,9 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from EnvBox import EnvBox
-from Utils import WebUtils
 from Builder import ChromeDriverBuilder
-
 
 
 def delete_cookies():
@@ -31,14 +29,16 @@ def get_article(links):
 
 
 options = []
-# options.append('--headless')
+#options.append('--headless')
 
 env = EnvBox()
-driver = ChromeDriverBuilder.createChromiumDriaver(env.PAGE, env.PATH_TO_CHROMIUM, options)
-webUtils = WebUtils(driver)
-    
-delete_cookies()
-article_links = get_links()
 
-for link in article_links:
-    print(link)
+for x in range(1,4):
+    PAGE = "https://polki.pl/po-godzinach/z-zycia-wziete,"+str(x)+".html"
+    driver = ChromeDriverBuilder.createChromiumDriaver(PAGE, env.PATH_TO_CHROMIUM, options)
+        
+    delete_cookies()
+    article_links = get_links()
+
+    for link in article_links:
+        print(link)
