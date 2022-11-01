@@ -11,6 +11,9 @@ class EnvBox:
 
     def __init__(self) -> None:
 
+        self.LAST_PAGE =\
+                3
+
         self.PAGE =\
             "https://polki.pl/po-godzinach/z-zycia-wziete,1.html"
                 

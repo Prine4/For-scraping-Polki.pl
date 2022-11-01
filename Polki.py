@@ -1,3 +1,5 @@
+import requests
+from bs4 import BeautifulSoup
 from lib2to3.pgen2 import driver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -24,21 +26,30 @@ def get_links():
     return res
 
 
-def get_article(links):
-    pass
-
 
 options = []
-#options.append('--headless')
+options.append('--headless')
 
 env = EnvBox()
 
-for x in range(1,4):
-    PAGE = "https://polki.pl/po-godzinach/z-zycia-wziete,"+str(x)+".html"
-    driver = ChromeDriverBuilder.createChromiumDriaver(PAGE, env.PATH_TO_CHROMIUM, options)
+for PAGE_OF_POLKI in range(1,env.LAST_PAGE):
+    page = "https://polki.pl/po-godzinach/z-zycia-wziete,"+str(PAGE_OF_POLKI)+".html"
+    driver = ChromeDriverBuilder.createChromiumDriaver(page, env.PATH_TO_CHROMIUM, options)
         
     delete_cookies()
     article_links = get_links()
 
-    for link in article_links:
+    for PAGE_SCRAPED, link in enumerate(article_links):
         print(link)
+
+        REQUEST_PAGE = requests.get(link)
+        soup = BeautifulSoup(REQUEST_PAGE.content, 'html.parser')
+        FIND_DIV = soup.find('div', class_=('off-canvas-content'))
+        FIND_ARTICLE = FIND_DIV.find('article', class_=('article'))
+        lines = content = FIND_ARTICLE.find_all('p')
+
+        file = open('/home/krzysztof/Desktop/Milion dolarów/Historie z Polki.pl/Historia:'+str(PAGE_OF_POLKI)+','+str(PAGE_SCRAPED), 'w')
+
+        for line in lines:
+            file.write(line.text)
+        file.close()
