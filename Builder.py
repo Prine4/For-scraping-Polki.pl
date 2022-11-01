@@ -12,7 +12,7 @@ class ChromeDriverBuilder:
     def createChromiumDriaver(page: str, path_to_chromium , arguments: List = []):
         chrome_driver_manager = ChromeDriverManager(
             chrome_type=ChromeType.CHROMIUM,
-            version=ChromeDriverBuilder.getChromiumVersion(path_to_chromium),
+            version='106.0.5249.61'
         )
 
         chrome_options = Options()

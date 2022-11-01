@@ -46,7 +46,7 @@ for PAGE_OF_POLKI in range(1,env.LAST_PAGE):
         soup = BeautifulSoup(REQUEST_PAGE.content, 'html.parser')
         FIND_DIV = soup.find('div', class_=('off-canvas-content'))
         FIND_ARTICLE = FIND_DIV.find('article', class_=('article'))
-        lines = content = FIND_ARTICLE.find_all('p')
+        lines = content = FIND_ARTICLE.find_all('p')[:-1]
 
         file = open('/home/krzysztof/Desktop/Milion dolarów/Historie z Polki.pl/Historia:'+str(PAGE_OF_POLKI)+','+str(PAGE_SCRAPED), 'w')
 
