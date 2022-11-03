@@ -1,4 +1,5 @@
 import requests
+import os
 from bs4 import BeautifulSoup
 from lib2to3.pgen2 import driver
 from selenium.webdriver.common.by import By
@@ -32,23 +33,28 @@ options.append('--headless')
 
 env = EnvBox()
 
-for PAGE_OF_POLKI in range(1,env.LAST_PAGE):
-    page = "https://polki.pl/po-godzinach/z-zycia-wziete,"+str(PAGE_OF_POLKI)+".html"
+os.makedirs('./Historie_z_Polki/')
+cwd = os.getcwd()
+absolute_path = cwd + '/Historie_z_Polki/'
+ULTIMATE_PATH = os.chdir(absolute_path)
+
+for number_page in range(1,env.LAST_PAGE):
+    page = "https://polki.pl/po-godzinach/z-zycia-wziete,"+str(number_page)+".html"
     driver = ChromeDriverBuilder.createChromiumDriaver(page, env.PATH_TO_CHROMIUM, options)
         
     delete_cookies()
     article_links = get_links()
 
-    for PAGE_SCRAPED, link in enumerate(article_links):
+    for article_number, link in enumerate(article_links):
         print(link)
 
         REQUEST_PAGE = requests.get(link)
         soup = BeautifulSoup(REQUEST_PAGE.content, 'html.parser')
-        FIND_DIV = soup.find('div', class_=('off-canvas-content'))
-        FIND_ARTICLE = FIND_DIV.find('article', class_=('article'))
-        lines = content = FIND_ARTICLE.find_all('p')[:-1]
+        find_div = soup.find('div', class_=('off-canvas-content'))
+        find_article = find_div.find('article', class_=('article'))
+        lines = content = find_article.find_all('p')[:-1]
 
-        file = open('/home/krzysztof/Desktop/Milion dolarów/Historie z Polki.pl/Historia:'+str(PAGE_OF_POLKI)+','+str(PAGE_SCRAPED), 'w')
+        file = open(str(ULTIMATE_PATH)+str(number_page)+','+str(article_number), 'w')
 
         for line in lines:
             file.write(line.text)
