@@ -7,24 +7,39 @@ from selenium.webdriver.chrome.options import Options
 
 CONFIG_PATH = 'config.json'
 
+
 class EnvBox:
 
     def __init__(self) -> None:
+        self.LAST_PAGE = \
+            1
 
-        self.LAST_PAGE =\
-                3
-
-        self.PAGE =\
+        self.PAGE = \
             "https://polki.pl/po-godzinach/z-zycia-wziete,1.html"
-                
-        self.REJECT_COOKIES_XPATH =\
+
+        self.REJECT_COOKIES_XPATH = \
             "//button[@class='tcf277-button tcf277-button--slim accept-targeting-disclaimer-button']"
-            
-        self.POSITION_OF_LINKS =\
+
+        self.POSITION_OF_LINKS_XPATH = \
             "//div[@class='row list-box small-up-1 medium-up-3']"
-            
-        self.ONLY_ARTICLE_LINKS_CSS =\
+
+        self.POSITION_OF_LINKS_CSS = \
+            ".special-info a"
+
+        self.ONLY_ARTICLE_LINKS_CSS = \
             'div[class=text-box] a'
-        
-        self.PATH_TO_CHROMIUM =\
+
+        self.PATH_TO_CHROMIUM = \
             '/usr/bin/chromium-browser'
+
+        self.OUTPUT_DIR = \
+            'Historie_z_Polki/'
+
+        self.OUTPUT_FILE = \
+            ''
+
+        self.POLKI_URL_TEMP = \
+            "https://polki.pl/po-godzinach/z-zycia-wziete,{page_number}.html"
+
+        self.FILE_OUTPUT_PATH = \
+            self.OUTPUT_DIR + "historia-{page_number}_{article_number}"
