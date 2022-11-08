@@ -12,7 +12,7 @@ class EnvBox:
 
     def __init__(self) -> None:
         self.LAST_PAGE = \
-            1
+            int(input('Ilość stron do scrapowania:'))
 
         self.PAGE = \
             "https://polki.pl/po-godzinach/z-zycia-wziete,1.html"

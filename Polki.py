@@ -54,7 +54,7 @@ def main():
             soup = BeautifulSoup(page.content, 'html.parser')
 
             lines = []
-            for paragraph in soup.select('article p'):
+            for paragraph in soup.select('article p')[:-1]:
                 lines.append(paragraph.text)
 
             articles.append(''.join(lines))
